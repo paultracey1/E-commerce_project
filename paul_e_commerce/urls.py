@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from home.views import get_index
 from accounts import urls as accounts_urls
+from accounts import reset_urls as reset_urls
 
 from django.conf.urls import url, include
 
@@ -24,4 +25,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', get_index, name='index' ),
     url(r'accounts/', include(accounts_urls)),
+    url(r'user/', include(reset_urls))
 ]
