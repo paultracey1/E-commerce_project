@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_gravatar',
     'django_forms_bootstrap',
+    'rest_framework',
     'home',
-    'accounts'
+    'accounts',
+    'products',
 ]
 
 MIDDLEWARE = [
