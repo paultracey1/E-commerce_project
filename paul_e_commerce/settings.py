@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'home',
     'accounts',
     'products',
+    'cart',
+    'payments',
 ]
 
 MIDDLEWARE = [
@@ -133,6 +135,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
 DEFAULT_FROM_EMAIL = 'paulecommerce@example.com'
 
 # The following settings are for dev/debug.
@@ -140,3 +146,7 @@ DEFAULT_FROM_EMAIL = 'paulecommerce@example.com'
 
 # To use Django's Console email backend
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET = os.getenv('STRIPE_SECRET_KEY')
