@@ -9,6 +9,7 @@
     <meta name="author" content="">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/cerulean/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/custom.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
     {% block head_js %}{% endblock %}
@@ -17,7 +18,7 @@
 <div class="container">
    <div class="masthead">
        <ul class="nav nav-pills pull-right">
-            <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a></li>
             <li><a href="{% url 'categories' %}"><i class="fa fa-cube"></i> Products</a></li>
             {% if user.is_authenticated %}
                 <li><a href="{% url 'profile' %}"><i class="fa fa-user"></i> Profile</a></li>

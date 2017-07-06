@@ -4,6 +4,7 @@
     {% for category in categories %}
         <li class="category-name"><a href="{% url 'category' category.id %}">{{ category.name }}</a></li>
     {% endfor %}
+    
 {% endblock sidebar %}
 
 
