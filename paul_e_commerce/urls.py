@@ -29,6 +29,7 @@ from django.views import static
 from categories import urls as categories_urls
 
 from blog import urls as blog_urls
+from books import urls as books_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -40,5 +41,6 @@ urlpatterns = [
     url(r'^payments/', include(payments_urls)),
     url(r'^cart/', include(cart_urls)),
     url(r'^blog/', include(blog_urls)),
+    url(r'^books/', include(books_urls)),
     url(r'^media/(?P<path>.*)$', static.serve,{'document_root': MEDIA_ROOT}),
 ]

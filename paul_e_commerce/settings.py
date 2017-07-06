@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'payments',
     'categories',
     'blog',
+    'books',
 ]
 
 MIDDLEWARE = [
