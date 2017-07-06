@@ -28,6 +28,8 @@ from .settings import MEDIA_ROOT
 from django.views import static
 from categories import urls as categories_urls
 
+from blog import urls as blog_urls
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', get_index, name='index' ),
@@ -37,5 +39,6 @@ urlpatterns = [
     url(r'^categories/', include(categories_urls)),
     url(r'^payments/', include(payments_urls)),
     url(r'^cart/', include(cart_urls)),
+    url(r'^blog/', include(blog_urls)),
     url(r'^media/(?P<path>.*)$', static.serve,{'document_root': MEDIA_ROOT}),
 ]
