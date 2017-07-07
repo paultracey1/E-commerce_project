@@ -7,6 +7,9 @@
 <p>{{book.description}}</p>
 <p>{{book.ISBN}}</p>
 
+{% comment %}<button class="btn btn-default" onclick="location.href='edit'">Edit</button>{% endcomment %}
+
+<a href="{% url 'edit_book' book.id %}">Edit</a>
         
 <p><button class="btn btn-default" onclick="location.href='/books'">Back to Books</button> </p>
 
