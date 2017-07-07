@@ -4,6 +4,11 @@ from rest_framework import viewsets
 from .serializers import BookSerializer
 from django.template.context_processors import csrf
 
+from django.contrib.auth.decorators import login_required
+from .forms import BookForm
+from django.utils import timezone
+
+
 
 # Create your views here.
 def all_books(request):
@@ -15,6 +20,22 @@ def all_books(request):
 def book_detail(request, id):
     book  = get_object_or_404(Book, pk=id)
     return render(request, "bookdetail.html", {'book': book})
+
+
+
+
+@login_required(login_url='/accounts/login')
+def new_book(request):
+    if request.method == "POST":
+        form = BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            book = form.save(commit=False)
+            book.published_date = timezone.now()
+            book.save()
+            return redirect(book_detail, book.pk)
+    else:
+        form = BookForm()
+    return render(request, 'bookaddform.html', {'form': form})
 
 
 
