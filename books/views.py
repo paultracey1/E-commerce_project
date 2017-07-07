@@ -13,11 +13,8 @@ def all_books(request):
     return render(request, "books.html", {"books": books}, args)
 
 def book_detail(request, id):
-
-    post  = get_object_or_404(Book, pk=id)
-    post.views += 1 # clock up the number of post views
-    post.save()
-    return render(request, "bookdetail.html", {'post': post})
+    book  = get_object_or_404(Book, pk=id)
+    return render(request, "bookdetail.html", {'book': book})
 
 
 

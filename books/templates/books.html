@@ -15,7 +15,7 @@
         {% for book in books %}
             <tr>
                 <td><img height="100" width="100" src="{{ MEDIA_URL }}{{ book.image }}"></td>
-                <td>{{ book.title }}</td>
+                <td><a href="{% url 'book_detail' book.id %}">{{ book.title }}</a></td>
                 <td>{{ book.author }}</td>
                 <td>{{ book.description }}</td>
                 <td>{{ book.ISBN }}</td>
