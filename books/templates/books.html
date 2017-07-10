@@ -4,11 +4,11 @@
         <thead>
         <tr>
             <th>Image</th>
-            <th>Name</th>
+            <th>Title</th>
+            <th>Author</th>
             <th>Description</th>
-            <th>Price</th>
+            <th>ISBN</th>
             <th>Buy</th>
-            <th>Cart</th>
         </tr>
         </thead>
         <tbody>
@@ -19,7 +19,7 @@
                 <td>{{ book.author }}</td>
                 <td>{{ book.description }}</td>
                 <td>{{ book.ISBN }}</td>
-                <td><a href="#" )>Buy Now</a></td>
+                <td><a href="{% url 'buy_now_stripe' book.id %}" )>Buy Now</a></td>
                 {#                    <td><a href="{% url 'add_to_cart' product.id %}")>Add To Cart</a></td>#}
                 <td>
                     <form method="post" action="#">

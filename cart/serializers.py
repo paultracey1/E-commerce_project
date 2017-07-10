@@ -11,4 +11,4 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class CartItemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CartItem
-        fields = ('user', 'product', 'quantity')
+        fields = ('user', 'book', 'quantity')

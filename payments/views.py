@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.template.context_processors import csrf
 from django.conf import settings
 from products.models import Product
+from books.models import Book
 import stripe
 
 stripe.api_key = settings.STRIPE_SECRET
@@ -16,11 +17,11 @@ def buy_now(request, id):
         form = MakePaymentForm(request.POST)
         if form.is_valid():
             try:
-                product = get_object_or_404(Product, pk=id)
+                book = get_object_or_404(Book, pk=id)
                 customer = stripe.Charge.create(
-                    amount= int(product.price * 100),
+                    amount= int(book.price * 100),
                     currency="EUR",
-                    description=product.name,
+                    description=book.title,
                     card=form.cleaned_data['stripe_id'],
                 )
             except (stripe.error.CardError, e):
@@ -28,7 +29,7 @@ def buy_now(request, id):
 
             if customer.paid:
                 messages.success(request, "You have successfully paid")
-                return redirect(reverse('products'))
+                return redirect(reverse('books'))
             else:
                 messages.error(request, "Unable to take payment")
         else:
@@ -36,9 +37,9 @@ def buy_now(request, id):
 
     else:
         form = MakePaymentForm()
-        product = get_object_or_404(Product, pk=id)
+        book = get_object_or_404(Book, pk=id)
 
-    args = {'form': form, 'publishable': settings.STRIPE_PUBLISHABLE, 'product': product}
+    args = {'form': form, 'publishable': settings.STRIPE_PUBLISHABLE, 'book': book}
     args.update(csrf(request))
 
     return render(request, 'pay.html', args)
