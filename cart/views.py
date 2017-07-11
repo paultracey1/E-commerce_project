@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 
 from .models import CartItem
 from django.contrib.auth.decorators import login_required
-from products.models import Product
 from books.models import Book
 from payments.forms import MakePaymentForm
 from django.template.context_processors import csrf
@@ -25,7 +24,7 @@ def user_cart(request):
     cartItems = CartItem.objects.filter(user=request.user)
     total = 0
     for item in cartItems:
-        total += item.quantity * item.book.price
+        total += item.book.price
 
     if request.method == 'POST':
         form = MakePaymentForm(request.POST)
@@ -68,16 +67,13 @@ def user_cart(request):
 @login_required(login_url="/accounts/login")
 def add_to_cart(request, id):
     book = get_object_or_404(Book, pk=id)
-    quantity=int(request.POST.get('quantity'))
 
     try:
         cartItem = CartItem.objects.get(user=request.user, book=book)
-        cartItem.quantity += quantity
     except CartItem.DoesNotExist:
         cartItem = CartItem(
             user=request.user,
             book=book,
-            quantity=quantity
         )
 
     cartItem.save()
@@ -92,6 +88,13 @@ def adjust_cart(request, id):
         cartItem.save()
     else:
         cartItem.delete()
+    return redirect(reverse('cart'))
+
+
+def remove_cart(request, id):
+    cartItem = CartItem.objects.get(id=id)
+    cartItem.delete()
+
     return redirect(reverse('cart'))
 
 

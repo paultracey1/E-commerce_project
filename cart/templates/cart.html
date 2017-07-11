@@ -17,29 +17,29 @@
         <thead>
         <tr>
             <th>Image</th>
-            <th>Name</th>
+            <th>Title</th>
+            <th>Author</th>
             <th>Description</th>
-            <th>Price</th>
-            <th>Quantity</th>
+            <th>ISBN</th>
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
         {% for item in items %}
             <tr>
-                <td><img height="100" width="100" src="{{ MEDIA_URL }}{{ item.product.image }}"></td>
-                <td>{{ item.product.name }}</td>
-                <td>{{ item.product.description }}</td>
-                <td>{{ item.product.price }}</td>
-                <td>{{ item.quantity }}</td>
+                <td><img height="120" width="80" src="{{ MEDIA_URL }}{{ book.image }}"></td>
+                <td>{{ item.book.title }}</td>
+                <td>{{ item.book.author }}</td>
+                <td>{{ item.book.description }}</td>
+                <td>{{ item.book.ISBN }}</td>
                 <td>
-                    <form method="post" action="{% url 'adjust_cart' item.id %}">
+                    <form method="post" action="{% url 'remove_cart' item.id %}">
                         {% csrf_token %}
-                        Quantity
+                        <button type="submit">Remove from Cart</button>
+                        {% comment %}Quantity
                         <input name='quantity' type="number" min="0" max="999">
-                        <button type="submit">Adjust</button>
+                        <button type="submit">Adjust</button>{% endcomment %}
                     </form>
-
                 </td>
             </tr>
         {% endfor %}

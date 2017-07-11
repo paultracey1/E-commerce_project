@@ -1,12 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Category
-from products.models import Product
+from books.models import Book
+
 
 # Create your views here.
 def root_categories(request):
     categories = Category.objects.filter(parent=None)
 
-    args = { 'categories': categories, 'subcategories': {}, 'products': {}}
+    args = { 'categories': categories, 'subcategories': {}, 'books': {}}
     return render(request, 'categories.html', args)
 
 
@@ -22,9 +23,9 @@ def get_category(request, id):
 
     subcategories = Category.objects.filter(parent=this_category)
 
-    products = this_category.products.all()
+    books = this_category.books.all()
 
-    args = { 'categories': subcategories, 'products': products, 'crumbs': crumbs}
+    args = { 'categories': subcategories, 'books': books, 'crumbs': crumbs}
     return render(request, 'categories.html', args)
 
 

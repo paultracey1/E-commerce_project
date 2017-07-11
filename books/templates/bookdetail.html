@@ -3,15 +3,20 @@
 {% block content %}
 
 <h1>{{book.title}}</h1>
+<img height="120" width="80" src="{{ MEDIA_URL }}{{ book.image }}">
 <h4>{{book.author}}</h4>
 <p>{{book.description}}</p>
 <p>{{book.ISBN}}</p>
-<p>{{book.price}}</p>
+<h4>{{book.price}}</h4>
 
 {% comment %}<button class="btn btn-default" onclick="location.href='edit'">Edit</button>{% endcomment %}
 
 <p><button class="btn btn-default" onclick="location.href='{% url 'edit_book' book.id %}'">Edit</button> </p>
+
+<p><button class="btn btn-default" onclick="location.href='{% url 'buy_now_stripe' book.id %}'">Buy Book</button></p>
+
+<br>
         
-<p><button class="btn btn-default" onclick="location.href='/books'">Back to Books</button> </p>
+<p><button class="btn btn-default" onclick="location.href='/categories'">Back to Books</button> </p>
 
 {% endblock %}

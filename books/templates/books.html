@@ -14,15 +14,14 @@
         <tbody>
         {% for book in books %}
             <tr>
-                <td><img height="100" width="100" src="{{ MEDIA_URL }}{{ book.image }}"></td>
+                <td><img height="120" width="80" src="{{ MEDIA_URL }}{{ book.image }}"></td>
                 <td><a href="{% url 'book_detail' book.id %}">{{ book.title }}</a></td>
                 <td>{{ book.author }}</td>
                 <td>{{ book.description }}</td>
                 <td>{{ book.ISBN }}</td>
                 <td><a href="{% url 'buy_now_stripe' book.id %}" )>Buy Now</a></td>
-                {#                    <td><a href="{% url 'add_to_cart' product.id %}")>Add To Cart</a></td>#}
                 <td>
-                    <form method="post" action="#">
+                    <form method="post" action="{% url 'add_to_cart' book.id %}">
                         {% csrf_token %}
                         Quantity
                         <input name='quantity' type="number" min="1" max="999">
