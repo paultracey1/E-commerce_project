@@ -11,7 +11,8 @@ from django.utils import timezone
 
 # Create your views here.
 def all_books(request):
-    books = Book.objects.all()
+    books = Book.objects.filter(published_date__lte=timezone.now()
+                                ).order_by('-published_date')
     args = {}
     args.update(csrf(request))
     return render(request, "books.html", {"books": books}, args)
@@ -46,6 +47,13 @@ def edit_book(request, id):
     else:
         form = BookForm(instance=book)
     return render(request, 'bookaddform.html', {'form': form})
+
+
+
+
+def do_search(request):
+    books = Book.objects.filter(title__contains=request.GET['q'])
+    return render(request, 'results.html', {'books': books})
 
 
 
