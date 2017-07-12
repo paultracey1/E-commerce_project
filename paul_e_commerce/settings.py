@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'disqus',
     'django_gravatar',
     'django_forms_bootstrap',
     'rest_framework',
@@ -149,3 +151,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE_KEY')
 STRIPE_SECRET = os.getenv('STRIPE_SECRET_KEY')
+
+
+DISQUS_WEBSITE_SHORTNAME = 'books'
+SITE_ID = 1
