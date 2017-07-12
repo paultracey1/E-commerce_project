@@ -6,6 +6,7 @@ from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from .forms import BookForm
 from django.utils import timezone
+from django.db.models import Q
 
 
 
@@ -52,7 +53,7 @@ def edit_book(request, id):
 
 
 def do_search(request):
-    books = Book.objects.filter(title__contains=request.GET['q'])
+    books = Book.objects.filter(Q(title__contains=request.GET['q']) | Q(author__contains=request.GET['q']))
     return render(request, 'results.html', {'books': books})
 
 
