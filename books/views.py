@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import BookForm
 from django.utils import timezone
 from django.db.models import Q
+from django.http import HttpResponseForbidden
 
 
 
@@ -37,7 +38,12 @@ def new_book(request):
 
 
 def edit_book(request, id):
+
     book = get_object_or_404(Book, pk=id)
+
+    if book.seller != request.user:
+        return HttpResponseForbidden()
+
     if request.method == "POST":
       form = BookForm(request.POST, request.FILES, instance=book)
       if form.is_valid():
@@ -53,7 +59,7 @@ def edit_book(request, id):
 
 
 def do_search(request):
-    books = Book.objects.filter(Q(title__contains=request.GET['q']) | Q(author__contains=request.GET['q']))
+    books = Book.objects.filter(Q(title__contains=request.GET['q']) | Q(author__contains=request.GET['q']) | Q(genre__contains=request.GET['q']))
     return render(request, 'results.html', {'books': books})
 
 

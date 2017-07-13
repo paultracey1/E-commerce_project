@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+from django.contrib.auth.models import User
+
 class Book(models.Model):
 
     DRAMA = 'Drama'
@@ -11,6 +13,7 @@ class Book(models.Model):
         (THRILLER, 'Thriller'),
     )
 
+    seller = models.ForeignKey(User)
     title = models.CharField(max_length=254, default='')
     author = models.CharField(max_length=254, default='')
     genre = models.CharField(max_length=254, choices=YEAR_IN_SCHOOL_CHOICES)

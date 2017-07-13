@@ -1,4 +1,18 @@
 {% extends "base.html" %}
+
+
+{% block sidebar %}
+
+    <!--{% for category in categories %}
+        <li class="category-name"><a href="{% url 'category' category.id %}">{{ category.name }}</a></li>
+    {% endfor %}-->
+    
+    <li class="category-name"><a href="/books/search/?q=drama">Drama</a></li>
+    <li class="category-name"><a href="/books/search/?q=thriller">Thriller</a></li>
+
+{% endblock sidebar %}
+
+
 {% block content %}
     <table class="table table-striped">
         <thead>

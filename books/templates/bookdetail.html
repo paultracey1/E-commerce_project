@@ -12,13 +12,15 @@
 
 {% comment %}<button class="btn btn-default" onclick="location.href='edit'">Edit</button>{% endcomment %}
 
+{% if book.seller == user %}
 <p><button class="btn btn-default" onclick="location.href='{% url 'edit_book' book.id %}'">Edit</button> </p>
-
+{% else %}
 <p><button class="btn btn-default" onclick="location.href='{% url 'buy_now_stripe' book.id %}'">Buy Book</button></p>
+{% endif %}
 
 <br>
-        
-<p><button class="btn btn-default" onclick="location.href='/categories'">Back to Books</button> </p>
+
+<p><button class="btn btn-default" onclick="location.href='/books'">Back to Books</button> </p>
 
 {% load disqus_tags %}
 {% set_disqus_title post.title %}
